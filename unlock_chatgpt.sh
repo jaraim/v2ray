@@ -115,6 +115,7 @@ main() {
     install_warp_socks
     edit_v2ray_config
     restart
+    echo -e "${red}浏览器访问 https://ip.gs/ 显示 Cloudflare IP 则成功!!!${none}\n"
 }
 
 main
