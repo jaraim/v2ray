@@ -62,13 +62,13 @@ edit_v2ray_config() {
 
     cat $configPath | sed 's|^\s*//.*||' >temp.json
 
-    config=$(cat temp.json)
+    config=`cat temp.json`
 
     # 操作json
     echo -e "${green}修改代理配置,使得ChatGPT流量走Warp.${none}\n"
 
     target_string="geosite:openai"
-    main_string=$config | jq ".routing.rules"
+    main_string=`cat temp.json| jq ".routing.rules"`
 
     if echo "$main_string" | grep -q "$target_string"; then
         echo "V2ray 已经配置ChatGPT分流策略."
@@ -112,7 +112,7 @@ restart() {
 
 
 main() {
-    install_warp_socks
+    echo "0" | warp || install_warp_socks
     edit_v2ray_config
     restart
     echo -e "${red}浏览器访问 https://ip.gs/ 显示 Cloudflare IP 则成功!!!${none}\n"
